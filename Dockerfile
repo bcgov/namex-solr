@@ -3,6 +3,8 @@ MAINTAINER  Jason Dudash "jason.dudash@gmail.com"
 
 USER root
 ENV STI_SCRIPTS_PATH=/usr/libexec/s2i
+ENV POSTGRESQL_VERSION=42.2.1
+
 
 LABEL io.k8s.description="Run SOLR search in OpenShift" \
       io.k8s.display-name="SOLR 6.6" \
@@ -15,6 +17,9 @@ RUN chmod -R a+rx ${STI_SCRIPTS_PATH}
 
 # If we need to add files as part of every SOLR conf, they'd go here
 # COPY ./solr-config/ /tmp/solr-config
+
+# Copy drivers into the image
+wget -nv -O /opt/solr/server/lib/pgsql-jdbc.jar http://central.maven.org/maven2/org/postgresql/postgresql/$POSTGRESQL_VERSION/postgresql-$POSTGRESQL_VERSION.jar && \
 
 # Give the SOLR directory to root group (not root user)
 # https://docs.openshift.org/latest/creating_images/guidelines.html#openshift-origin-specific-guidelines
