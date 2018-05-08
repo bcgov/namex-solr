@@ -5,6 +5,7 @@
 # https://docs.openshift.org/latest/creating_images/s2i.html#creating-images-s2i
 
 # Override this env variable to change the name of your core.
+
 if [ -z "${CORE_NAME}" ]; then
   CORE_NAME=autocore
 fi
@@ -20,6 +21,15 @@ CORE_NAMES=($CORE_NAME)
 
 # Clear the name for use in the loop
 unset CORE_NAME
+
+echo "====================================================================="
+echo "Setting up SOLR image"
+echo "---------------------------------------------------------------------"
+echo "Cores: ${#CORE_NAMES[@]}"
+for CORE_NAME in "${CORE_NAMES[@]}"; do
+  echo "  ${CORE_NAME}"
+done
+echo "====================================================================="
 
 # Iterate through the core names
 for CORE_NAME in "${CORE_NAMES[@]}"; do
@@ -77,4 +87,9 @@ for CORE_NAME in "${CORE_NAMES[@]}"; do
       cp -r "${CONF_DIR}/" "${CORES_DIR}"
     fi
 done
+
+echo "====================================================================="
+echo "SOLR Setup Complete"
+echo "====================================================================="
+
 exec solr -f
