@@ -20,7 +20,8 @@ export MSYS_NO_PATHCONV=1
 # ToDo:
 # * Add support for create or update.
 # -----------------------------------------------------------------------------------
-#DEBUG_MESSAGES=1
+DEBUG_MESSAGES=1
+echo '*** generateBuilds.sh'
 # -----------------------------------------------------------------------------------
 PROJECT_NAME="${1}"
 GIT_REF="${2}"
@@ -60,12 +61,12 @@ fi
 # -------------------------------------------------------------------------------------
 BuildConfigPostfix="_BuildConfig.json"
 
-SOLR_BASE_BUILD_NAME="solr-base"
+SOLR_BASE_BUILD_NAME="namex-solr-base"
 SOLR_BASE_GIT_URI=${GIT_URI}
 SOLR_BASE_GIT_REF=${GIT_REF}
 SOLR_BASE_CONTEXT_DIR_ROOT=""
 
-SOLR_BUILD_NAME="solr"
+SOLR_BUILD_NAME="namex-solr"
 SOLR_GIT_URI=${GIT_URI}
 SOLR_GIT_REF=${GIT_REF}
 SOLR_CONTEXT_DIR_ROOT="solr"
@@ -94,6 +95,13 @@ echo
 echo "============================================================================="
 echo "Generating build configuration for ${SOLR_BASE_BUILD_NAME} ..."
 echo "-----------------------------------------------------------------------------"
+echo ${SCRIPTS_DIR}/configureBaseBuild.sh \
+	"${SOLR_BASE_GIT_URI}" \
+	"${SOLR_BASE_GIT_REF}" \
+	"${SOLR_BASE_CONTEXT_DIR_ROOT}" \
+	${SOLR_BASE_BUILD_NAME} \
+	"${TEMPLATE_DIR}/${SOLR_BASE_BUILD_NAME}-build.json"
+
 ${SCRIPTS_DIR}/configureBaseBuild.sh \
 	"${SOLR_BASE_GIT_URI}" \
 	"${SOLR_BASE_GIT_REF}" \
@@ -106,6 +114,16 @@ echo
 echo "============================================================================="
 echo "Generating build configuration for ${SOLR_BUILD_NAME} ..."
 echo "-----------------------------------------------------------------------------"
+echo ${SCRIPTS_DIR}/configureSolrBuild.sh \
+	${SOLR_GIT_URI} \
+	${SOLR_GIT_REF} \
+	${SOLR_CONTEXT_DIR_ROOT} \
+	${SOLR_BUILD_NAME} \
+	"${TEMPLATE_DIR}/${SOLR_BUILD_NAME}-build.json" \
+	${SOLR_SOURCE_IMAGE_NAME} \
+	${SOLR_SOURCE_IMAGE_TAG} \
+	${SOLR_SOURCE_IMAGE_NAMESPACE}
+
 ${SCRIPTS_DIR}/configureSolrBuild.sh \
 	${SOLR_GIT_URI} \
 	${SOLR_GIT_REF} \
@@ -123,6 +141,7 @@ echo "Creating build configurations in OpenShift project; ${PROJECT_NAME} ..."
 echo "============================================================================="
 for file in *${BuildConfigPostfix}; do
 	echo "Loading ${file} ...";
+	echo oc create -f ${file};
 	oc create -f ${file};
 	echo;
 done

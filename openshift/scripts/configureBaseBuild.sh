@@ -16,8 +16,9 @@ BUILD_CONFIG_TEMPLATE=${5}
 OUTPUT_IMAGE_TAG=${6}
 BUILD_CONFIG_POST_FIX=${7}
 # -----------------------------------------------------------------------------------
-#DEBUG_MESSAGES=1
+DEBUG_MESSAGES=1
 # -----------------------------------------------------------------------------------
+
 if [ -z "$GIT_URI" ]; then
 	echo "You must supply GIT_URI."
 	MissingParam=1

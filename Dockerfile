@@ -19,7 +19,11 @@ RUN chmod -R a+rx ${STI_SCRIPTS_PATH}
 # COPY ./solr-config/ /tmp/solr-config
 
 # Copy drivers into the image
-wget -nv -O /opt/solr/server/lib/pgsql-jdbc.jar http://central.maven.org/maven2/org/postgresql/postgresql/$POSTGRESQL_VERSION/postgresql-$POSTGRESQL_VERSION.jar && \
+#RUN apk update && \
+#    apk add --no-cache \
+#    wget \
+
+#    wget -nv -O /opt/solr/server/lib/pgsql-jdbc.jar http://central.maven.org/maven2/org/postgresql/postgresql/$POSTGRESQL_VERSION/postgresql-$POSTGRESQL_VERSION.jar && \
 
 # Give the SOLR directory to root group (not root user)
 # https://docs.openshift.org/latest/creating_images/guidelines.html#openshift-origin-specific-guidelines
