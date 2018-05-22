@@ -6,8 +6,6 @@
 
 # Override this env variable to change the name of your core.
 
-echo `whoami`
-
 if [ -z "${CORE_NAME}" ]; then
   CORE_NAME=autocore
 fi
