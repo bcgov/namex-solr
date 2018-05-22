@@ -65,14 +65,14 @@
       "displayName": "Name",
       "description": "The name assigned to all of the resources defined in this template.",
       "required": true,
-      "value": "solr-base"
+      "value": "namex-solr-base"
     },
     {
       "name": "GIT_REPO_URL",
       "displayName": "Git Repo URL",
       "description": "The URL to your GIT repo, don't use the default unless your just experimenting.",
       "required": true,
-      "value": "https://github.com/WadeBarnes/openshift-solr"
+      "value": "https://github.com/VarekBoettcher/namex-solr.git"
 
     },
     {

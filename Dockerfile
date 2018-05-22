@@ -27,7 +27,8 @@ RUN chown -R $SOLR_USER:$SOLR_GROUP /opt/docker-solr/scripts
 
 
 # Copy Postgres drivers into the image
-RUN wget -nv $POSTGRES_URL -O /opt/solr/server/lib/pgsql-jdbc.jar
+RUN wget -nv $POSTGRES_URL -O /opt/solr/server/lib/pgsql-jdbc.jar \
+  && chown $SOLR_USER:$SOLR_GROUP /opt/solr/server/lib/pgsql-jdbc.jar
 
 # Give the SOLR directory to root group (not root user)
 # https://docs.openshift.org/latest/creating_images/guidelines.html#openshift-origin-specific-guidelines
