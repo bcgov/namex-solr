@@ -34,10 +34,7 @@ echo "====================================================================="
 # Iterate through the core names
 for CORE_NAME in "${CORE_NAMES[@]}"; do
 
-
-    if [ -z "${CONF_DIR}" ]; then
-      CONF_DIR="${SOLR_CONF_DIR}/${CORE_NAME}"
-    fi
+    CONF_DIR="${SOLR_CONF_DIR}/${CORE_NAME}"
 
     if [ -z "${SOLR_HOME}" ]; then
       CORES_DIR="/opt/solr/server/solr/mycores"
@@ -49,7 +46,7 @@ for CORE_NAME in "${CORE_NAMES[@]}"; do
 
     # Use scripts from the official docker-solr image
     # https://github.com/docker-solr/docker-solr/tree/master/scripts
-    echo "Working from; $(pwd)"
+    echo "Working from: $(pwd)"
     echo
 
     if [[ ! -d ${CORE_DIR} ]]; then
