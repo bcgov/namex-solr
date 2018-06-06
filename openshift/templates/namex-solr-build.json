@@ -107,21 +107,21 @@
       "displayName": "Source Image Name",
       "required": true,
       "description": "The name of the source image.",
-      "value": "namex-solr-base"
+      "value": "solr-base"
     },
     {
       "name": "SOURCE_IMAGE_TAG",
       "displayName": "Source Image Tag",
       "required": true,
       "description": "The tag of the source image.",
-      "value": "latest"
+      "value": "6.6"
     },
     {
       "name": "SOURCE_IMAGE_NAMESPACE",
       "displayName": "Namespace",
       "required": true,
       "description": "The OpenShift namespace where the ImageStream resides.",
-      "value": "servicebc-ne-tools"
+      "value": "openshift"
     },
     {
       "name": "OUTPUT_IMAGE_TAG",

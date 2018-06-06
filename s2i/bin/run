@@ -25,7 +25,7 @@ unset CORE_NAME
 echo "====================================================================="
 echo "Setting up SOLR image"
 echo "---------------------------------------------------------------------"
-echo "Cores: ${#CORE_NAMES[@]}"
+echo "Core(s): ${#CORE_NAMES[@]}"
 for CORE_NAME in "${CORE_NAMES[@]}"; do
   echo "  ${CORE_NAME}"
 done
@@ -86,7 +86,9 @@ for CORE_NAME in "${CORE_NAMES[@]}"; do
 done
 
 echo "====================================================================="
-echo "SOLR Setup Complete"
+echo "Setup Complete"
+echo
+echo "Starting SOLR..."
 echo "====================================================================="
 
 exec solr -f
