@@ -21,7 +21,9 @@ RUN chmod -R a+rx ${STI_SCRIPTS_PATH}
 
 # Install jq, a command-line JSON parser
 # To be used with the automated core loading scripts
-RUN apt-get -y install jq
+RUN apt-get update \
+    && apt-get -y install jq \
+    && rm -rf /var/lib/apt/lists/*
 
 # Overwriting (and re-chown'ing) docker-solr script pre-loads so we can add our modified ones to support bringing up
 # SOLR with multiple cores
