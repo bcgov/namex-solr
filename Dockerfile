@@ -19,6 +19,10 @@ RUN chmod -R a+rx ${STI_SCRIPTS_PATH}
 # If we need to add files as part of every SOLR conf, they'd go here
 # COPY ./solr-config/ /tmp/solr-config
 
+# Install jq, a command-line JSON parser
+# To be used with the automated core loading scripts
+RUN apt-get -y install jq
+
 # Overwriting (and re-chown'ing) docker-solr script pre-loads so we can add our modified ones to support bringing up
 # SOLR with multiple cores
 COPY scripts /opt/docker-solr/scripts
