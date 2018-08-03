@@ -5,7 +5,7 @@ USER root
 ENV STI_SCRIPTS_PATH=/usr/libexec/s2i
 ENV SOLR_USER="solr"
 ENV POSTGRES_URL="http://central.maven.org/maven2/org/postgresql/postgresql/42.2.1/postgresql-42.2.1.jar"
-
+ENV SOLR_JDBC_URL="http://central.maven.org/maven2/com/s24/search/solr/solr-jdbc/2.1.0/solr-jdbc-2.1.0.jar"
 
 LABEL io.k8s.description="Run SOLR search in OpenShift" \
       io.k8s.display-name="SOLR 6.6" \
@@ -30,10 +30,13 @@ RUN apt-get update \
 COPY scripts /opt/docker-solr/scripts
 RUN chown -R $SOLR_USER /opt/docker-solr/scripts
 
-
 # Copy Postgres drivers into the image
 RUN wget -nv $POSTGRES_URL -O /opt/solr/server/lib/pgsql-jdbc.jar \
   && chown $SOLR_USER /opt/solr/server/lib/pgsql-jdbc.jar
+
+# Copy Solr-JDBC library into the image
+RUN wget -nv $SOLR_JDBC_URL -O /opt/solr/server/lib/solr-jdbc-2.1.0.jar \
+  && chown $SOLR_USER /opt/solr/server/lib/solr-jdbc-2.1.0.jar
 
 # Give the SOLR directory to root group (not root user)
 # https://docs.openshift.org/latest/creating_images/guidelines.html#openshift-origin-specific-guidelines
