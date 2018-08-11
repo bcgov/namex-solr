@@ -56,7 +56,7 @@ RUN wget -nv $JETTY_URL -O /tmp/jetty.tgz \
   && cp /tmp/jetty/modules/security.mod /opt/solr/server/modules \
   && cp /tmp/jetty/modules/servlet.mod /opt/solr/server/modules \
   && cp /tmp/jetty/modules/webapp.mod /opt/solr/server/modules \
-  && rm -f /tmp/jetty* \
+  && rm -rf /tmp/jetty* \
   && mkdir /opt/solr/server/start.d \
   && echo "--module=plus" > /opt/solr/server/start.d/plus.ini
 
