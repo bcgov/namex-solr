@@ -76,8 +76,8 @@ In the OpenShift Web Console go to the `names examination (tools)` project, and 
 ## Replacing the `namex-solr-base` Build
 
 *This step is only needed when you want to change the Github repository used for the build. If want to alter the build
-process, do so and commit your changes to the repository. Then click the Build button in the `OpenShift Web Console` to
-start a new build.*
+process, do so and commit your changes to the repository. Then click the `Start Build` button in the `OpenShift Web
+Console` to start a new build.*
 
 The replacement process is nearly identical to the creation process, just follow the creation instructions above except
 using `replace` rather than `create` for the final `oc` call.
