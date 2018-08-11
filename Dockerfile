@@ -5,7 +5,9 @@ USER root
 ENV STI_SCRIPTS_PATH=/usr/libexec/s2i
 ENV SOLR_USER="solr"
 ENV POSTGRES_URL="http://central.maven.org/maven2/org/postgresql/postgresql/42.2.1/postgresql-42.2.1.jar"
-ENV SOLR_JDBC_URL="http://central.maven.org/maven2/com/s24/search/solr/solr-jdbc/2.1.0/solr-jdbc-2.1.0.jar"
+ENV SOLR_JDBC_URL="http://central.maven.org/maven2/com/s24/search/solr/solr-jdbc/2.1.0/solr-jdbc-2.3.8.jar"
+ENV JETTY_URL="https://repo1.maven.org/maven2/org/eclipse/jetty/jetty-distribution/9.3.14.v20161028/jetty-distribution-9.3.14.v20161028.tar.gz"
+ENV DB_UTILS_URL="http://central.maven.org/maven2/commons-dbutils/commons-dbutils/1.7/commons-dbutils-1.7.jar"
 
 LABEL io.k8s.description="Run SOLR search in OpenShift" \
       io.k8s.display-name="SOLR 6.6" \
@@ -35,8 +37,28 @@ RUN wget -nv $POSTGRES_URL -O /opt/solr/server/lib/pgsql-jdbc.jar \
   && chown $SOLR_USER /opt/solr/server/lib/pgsql-jdbc.jar
 
 # Copy Solr-JDBC library into the image
-RUN wget -nv $SOLR_JDBC_URL -O /opt/solr/server/lib/solr-jdbc-2.1.0.jar \
-  && chown $SOLR_USER /opt/solr/server/lib/solr-jdbc-2.1.0.jar
+RUN wget -nv $SOLR_JDBC_URL -O /opt/solr/server/lib/solr-jdbc.jar \
+  && chown $SOLR_USER /opt/solr/server/lib/solr-jdbc.jar
+
+# Copy DB Utils library into the image
+RUN wget -nv $DB_UTILS_URL -O /opt/solr/server/lib/dbutils.jar \
+  && chown $SOLR_USER /opt/solr/server/lib/dbutils.jar
+
+# Pull down Jetty; untar it; copy a bunch of files; cleanup; create Jetty Plus config file.
+RUN wget -nv $JETTY_URL -O /tmp/jetty.tgz \
+  && tar --directory /tmp --extract --file jetty.tgz \
+  && mv /tmp/jetty-* /tmp/jetty \
+  && cp /tmp/jetty/etc/jetty-plus.xml /opt/solr/server/etc \
+  && cp /tmp/jetty/lib/jetty-jndi-*.jar /opt/solr/server/lib \
+  && cp /tmp/jetty/lib/jetty-plus-*.jar /opt/solr/server/lib \
+  && cp /tmp/jetty/modules/jndi.mod /opt/solr/server/modules \
+  && cp /tmp/jetty/modules/plus.mod /opt/solr/server/modules \
+  && cp /tmp/jetty/modules/security.mod /opt/solr/server/modules \
+  && cp /tmp/jetty/modules/servlet.mod /opt/solr/server/modules \
+  && cp /tmp/jetty/modules/webapp.mod /opt/solr/server/modules \
+  && rm -f /tmp/jetty* \
+  && mkdir /opt/solr/server/start.d \
+  && echo "--module=plus" > /opt/solr/server/start.d/plus.ini
 
 # Give the SOLR directory to root group (not root user)
 # https://docs.openshift.org/latest/creating_images/guidelines.html#openshift-origin-specific-guidelines

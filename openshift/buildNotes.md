@@ -76,6 +76,8 @@ imagestream "namex-solr-base" replaced
 buildconfig "namex-solr-base" replaced
 ```
 
+(Click the Build button?) 
+
 In the OpenShift Web Console go to the `names examination (tools)` project, and then `Builds` > `Builds`. Wait for the
 `solr` build to change Status to `Running` and then to `Complete`. You can also check the Created value to ensure that
 it is recent. 
@@ -83,3 +85,5 @@ it is recent.
 In the OpenShift Web Console go to the `names examination (tools)` project, and then `Builds` > `Images`. Click the
 `solr` image and the tag `Latest` should now have been updated. The image needs to be tagged in order to get it into a
 specific environment.
+
+(tag for dev?)
