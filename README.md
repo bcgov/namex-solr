@@ -1,7 +1,9 @@
 # Containerized SOLR On OpenShift
-Apache SOLR makes it easy to add search capability into your apps.  SOLR is a search server (backed by the Lucene serach library).  This repository provides a way for you to take advantage of that in OpenShift.
+Apache SOLR makes it easy to add search capability into your apps.  SOLR is a search server (backed by the Lucene search library).  This repository provides a way for you to take advantage of that in OpenShift.
 
-The NAMEX version of this image has some minor modifications to the startup scripts to accomodate starting with multiple cores.  This needed by the BC Registries Names Examination project.  Cores can be passed in as a comma delimited list.
+The BC Registries Names Examination project created the NAMEX version of this image with:
+* some minor modifications to the startup scripts to accommodate starting with multiple cores. Cores can be passed in as a comma delimited list.
+* addition of the Solr-JDBC library (v2.3.8) to allow reading of the synonyms from a database table.
 
 ## There are 2 distinct parts to this repo:
    
