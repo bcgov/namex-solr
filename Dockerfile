@@ -37,8 +37,9 @@ RUN wget -nv $POSTGRES_URL -O /opt/solr/server/lib/pgsql-jdbc.jar \
   && chown $SOLR_USER /opt/solr/server/lib/pgsql-jdbc.jar
 
 # Copy Solr-JDBC library into the image
-RUN wget -nv $SOLR_JDBC_URL -O /opt/solr/server/lib/solr-jdbc.jar \
-  && chown $SOLR_USER /opt/solr/server/lib/solr-jdbc.jar
+RUN mkdir /opt/solr/contrib/dataimporthandler/lib \
+  && wget -nv $SOLR_JDBC_URL -O /opt/solr/contrib/dataimporthandler/lib/solr-jdbc.jar \
+  && chown $SOLR_USER /opt/solr/contrib/dataimporthandler/lib/solr-jdbc.jar
 
 # Copy DB Utils library into the image
 RUN wget -nv $DB_UTILS_URL -O /opt/solr/server/lib/dbutils.jar \
