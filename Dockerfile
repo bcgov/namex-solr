@@ -5,7 +5,7 @@ USER root
 ENV STI_SCRIPTS_PATH=/usr/libexec/s2i
 ENV SOLR_USER="solr"
 ENV POSTGRES_URL="http://central.maven.org/maven2/org/postgresql/postgresql/42.2.1/postgresql-42.2.1.jar"
-ENV SOLR_JDBC_URL="http://central.maven.org/maven2/com/s24/search/solr/solr-jdbc/2.1.0/solr-jdbc-2.3.8.jar"
+ENV SOLR_JDBC_URL="http://central.maven.org/maven2/com/s24/search/solr/solr-jdbc/2.3.8/solr-jdbc-2.3.8.jar"
 ENV JETTY_URL="https://repo1.maven.org/maven2/org/eclipse/jetty/jetty-distribution/9.3.14.v20161028/jetty-distribution-9.3.14.v20161028.tar.gz"
 ENV DB_UTILS_URL="http://central.maven.org/maven2/commons-dbutils/commons-dbutils/1.7/commons-dbutils-1.7.jar"
 
