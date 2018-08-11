@@ -5,8 +5,8 @@ Apache Solr is the search index database used by the name examination system.
 This documentation describes the process used when recreating the `namex-solr-base` build and image in the
 `servicebc-ne-tools` OpenShift project. These steps must be performed before the `solr` build and image can be created.
 
-This documentation assumes that `oc.exe` from OpenShift Origin Client Tools has been installed and that the user either
-is running Minishift locally or has an account on the Pathfinder OpenShift cluster.
+This documentation assumes that `oc.exe` from OpenShift Origin Client Tools has been installed and that the user is
+either running Minishift locally or has an account on the Pathfinder OpenShift cluster.
 
 ## Log in to OpenShift
 
@@ -67,12 +67,11 @@ buildconfig "namex-solr-base" created
 ```
 
 In the OpenShift Web Console go to the `names examination (tools)` project, and then `Builds` > `Builds`. Wait for the
-`solr` build to change Status to `Running` and then to `Complete`. You can also check the Created value to ensure that
-it is recent. 
+`namex-solr-base` build to change Status to `Running` and then to `Complete`. You can also check the Created value to
+ensure that it is recent. 
 
 In the OpenShift Web Console go to the `names examination (tools)` project, and then `Builds` > `Images`. Click the
-`solr` image and the tag `Latest` should exist. Once the Deployment has been created for your environment, the image
-can be tagged.
+`namex-solr-base` image and the tag `Latest` should exist.
 
 ## Replacing the `namex-solr-base` Build
 
