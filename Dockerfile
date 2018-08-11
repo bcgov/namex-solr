@@ -46,7 +46,7 @@ RUN wget -nv $DB_UTILS_URL -O /opt/solr/server/lib/dbutils.jar \
 
 # Pull down Jetty; untar it; copy a bunch of files; cleanup; create Jetty Plus config file.
 RUN wget -nv $JETTY_URL -O /tmp/jetty.tgz \
-  && tar --directory /tmp --extract --file jetty.tgz \
+  && tar --directory /tmp --extract --file /tmp/jetty.tgz \
   && mv /tmp/jetty-* /tmp/jetty \
   && cp /tmp/jetty/etc/jetty-plus.xml /opt/solr/server/etc \
   && cp /tmp/jetty/lib/jetty-jndi-*.jar /opt/solr/server/lib \
