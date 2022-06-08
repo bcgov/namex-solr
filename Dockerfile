@@ -33,6 +33,10 @@ ENV DB_UTILS_URL="https://repo1.maven.org/maven2/commons-dbutils/commons-dbutils
 # ENV LEAR_DB="lear"
 # ENV LEAR_DB_HOST="host.docker.internal"
 # ENV LEAR_DB_PORT=""
+# # oracle (colin)
+# ENV COLIN_URL="jdbc:oracle:thin:@<oracle_ip_address>:<oracle_port>/<oracle_db_name>"
+# ENV COLIN_USER=""
+# ENV COLIN_PASSWORD=""
 
 LABEL io.k8s.description="Run SOLR search in OpenShift" \
   io.k8s.display-name="SOLR 6.6" \
@@ -60,6 +64,9 @@ RUN chown -R $SOLR_USER /opt/docker-solr/scripts
 # Copy Postgres drivers into the image
 RUN wget -nv $POSTGRES_URL -O /opt/solr/server/lib/pgsql-jdbc.jar \
   && chown $SOLR_USER /opt/solr/server/lib/pgsql-jdbc.jar
+
+# Copy oracle driver into image
+COPY ojdbc8.jar /opt/solr/server/lib
 
 # Copy Solr-JDBC library into the image
 RUN mkdir /opt/solr/contrib/dataimporthandler/lib \
