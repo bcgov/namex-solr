@@ -177,4 +177,38 @@
             <Arg>jdbc/bcrs_names</Arg>
         </Call>
     </New>
+    <!-- =====================================================================
+
+    The connection to the colin oracle database used for loading cores.
+
+    ====================================================================== -->
+    <New id="colin" class="org.eclipse.jetty.plus.jndi.Resource">
+        <Arg></Arg>
+        <Arg>jdbc/colin</Arg>
+        <Arg>
+            <New class="oracle.jdbc.pool.OracleDataSource">
+                <Set name="DriverType">thin</Set>
+                <Set name="URL">
+                    <Call class="java.lang.System" name="getenv">
+                        <Arg>COLIN_URL</Arg>
+                    </Call>
+                </Set>
+                <Set name="User">
+                    <Call class="java.lang.System" name="getenv">
+                        <Arg>COLIN_USER</Arg>
+                    </Call>
+                </Set>
+                <Set name="Password">
+                    <Call class="java.lang.System" name="getenv">
+                        <Arg>COLIN_PASSWORD</Arg>
+                    </Call>
+                </Set>
+            </New>
+        </Arg>
+
+        <!-- bind to java:comp/env for this webapp -->
+        <Call name="bindToENC">
+            <Arg>jdbc/colin</Arg>
+        </Call>
+    </New>
 </Configure>
